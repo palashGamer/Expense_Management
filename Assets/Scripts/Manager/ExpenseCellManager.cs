@@ -15,6 +15,10 @@ public class ExpenseCellManager : BManager {
             return expenseCellZone;
         }
     }
+    private void OnEnable()
+    {
+        HandleColor();
+    }
 
     public void ShowDetails(int value)
     {
@@ -27,6 +31,7 @@ public class ExpenseCellManager : BManager {
     {
         m_expenseCellZone.m_OthersHeading.text = key;
         m_expenseCellZone.m_inputField.text = value.ToString();
+        HandleColor();
     }
 
     public void OnAddClick()
@@ -40,7 +45,28 @@ public class ExpenseCellManager : BManager {
 
     public void OnMinusClick()
     {
-        
+        int a_value = int.Parse(m_expenseCellZone.m_inputField.text);
+
+        a_value -= int.Parse(m_expenseCellZone.m_additionInputField.text);
+
+        m_expenseCellZone.m_inputField.text = a_value.ToString();
+    }
+    void HandleColor()
+    {
+        if (m_expenseCellZone.m_OthersHeading != null)
+        {
+            Debug.Log("hiho: " + m_expenseCellZone.m_OthersHeading.text);
+            if (string.IsNullOrEmpty(m_expenseCellZone.m_OthersHeading.text))
+            {
+               // Debug.Log("grey");
+                m_expenseCellZone.m_OthersHeading.selectionColor = Color.grey;
+            }
+            else
+            {
+               // Debug.Log("blue");
+                m_expenseCellZone.m_OthersHeading.selectionColor = Color.blue;
+            }
+        }
     }
 
 

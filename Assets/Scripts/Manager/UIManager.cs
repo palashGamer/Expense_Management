@@ -55,4 +55,15 @@ public class UIManager : MonoBehaviour {
 
         UIManager.m_instance.m_uiZone.FixedPanel.LoadData_ExpensePanel(ExpenseDataHandler.GetMonthlyFixedData(GlobalRuntimeValue.m_CurrentMonthStartDate));
     }
+    private void OnApplicationQuit()
+    {
+        AndroidUtility.SaveExternally(JsonUtility.ToJson(ExpenseDataHandler.m_yearlyExpenseInfo));
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        if(pause)
+        {
+            AndroidUtility.SaveExternally(JsonUtility.ToJson(ExpenseDataHandler.m_yearlyExpenseInfo));
+        }
+    }
 }
